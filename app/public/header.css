@@ -1,0 +1,32 @@
+header {
+    display: flex;
+    background-color: #4c00b0;
+}
+
+header ul {
+    padding-top: 50px;
+}
+
+header ul li {
+    display: inline;
+    padding: 10px;
+    color: white;
+}
+
+header ul li:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.logo {
+    padding: 10px 0;
+}
+
+.navigation {
+    margin-left: auto;
+    padding-right: 10px;
+}
+
+.active {
+    text-decoration: underline;
+}
