@@ -3,43 +3,36 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Sustainability Advisory Committee</title>
 
         <link rel="stylesheet" href="header.css">
-
 
     </head>
 
     <body>
 
-        <header>
-
-            <figure class="logo">
-                <img src="assets/logo.png" alt="logo" width="100" height="100">
-            </figure>
-
-            <ul class="language">
-                <li id="en" class="active">English</li>  <!-- English -->
-                <li id="fr">Français</li> <!-- French  -->
-                <li id="sp">Español</li>  <!-- Spanish -->
-                <li id="ru">Pусский</li>  <!-- Russian -->
-                <li id="ar">عربي</li>     <!-- Arabic  -->
-                <li id="ch">中国人</li>    <!-- Chinese -->
-            </ul>
-
-            <ul class="navigation">
-                <li class="active">Home</li>
-                <li>Our Goals</li>
-                <li>About Us</li>
-                <li>Support</li>
-                <button>Join Us</button>
-            </ul>
-
-
-
+        <header id="site-header">
+            <!-- header content will be injected from json -->
         </header>
 
+        <main>
+            <section id="hero">
+                <!-- hero content populated from homepage.json -->
+            </section>
+
+            <section id="current-goals">
+                <h2 class="section-title">Current Goals</h2>
+                <div id="goals-container" class="goals-container"></div>
+            </section>
+        </main>
+
+        <footer id="site-footer">
+            <!-- footer populated from json -->
+        </footer>
+
         <script src="scripts/header.js"></script>
+        <script src="scripts/main.js"></script>
 
     </body>
 

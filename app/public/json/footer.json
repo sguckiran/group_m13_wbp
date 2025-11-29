@@ -1,0 +1,15 @@
+{
+  "logo": "assets/logo.png",
+  "links": [
+    { "label": "Language", "href": "#" },
+    { "label": "Learn More", "href": "#" },
+    { "label": "Support", "href": "#" }
+  ],
+  "copyright": "© 2025 Sustainability Advisory Committee",
+  "socials": [
+    { "name": "instagram", "href": "#" },
+    { "name": "linkedin", "href": "#" },
+    { "name": "x", "href": "#" }
+  ]
+}
+

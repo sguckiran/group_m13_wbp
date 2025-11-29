@@ -1,0 +1,12 @@
+{
+  "logo": "assets/logo.png",
+  "languages": ["English", "Français", "Español", "Pусский", "عربي", "中国人"],
+  "nav": [
+    { "label": "Home", "href": "index.html" },
+    { "label": "Our Goals", "href": "index.html#current-goals" },
+    { "label": "About Us", "href": "about.html" },
+    { "label": "Support", "href": "index.html#support" }
+  ],
+  "button": { "label": "Sign Up", "href": "#" }
+}
+

@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "title": "Shaping a Sustainable Future for Norwich",
+    "subtitle": "With the Sustainability Advisory Committee, learn how local policies align with the UN Sustainable Development Goals.",
+    "button": { "text": "find out more", "href": "#current-goals" },
+    "image": "assets/logo.png"
+  },
+  "goals": [
+    {
+      "title": "Climate Action",
+      "image": "assets/logo.png",
+      "category": "Replanting our forests!",
+      "description": "Taking necessary steps to protecting our nature.",
+      "link": "#"
+    },
+    {
+      "title": "Sustainable Energy",
+      "image": "assets/logo.png",
+      "category": "More solar-panels planned!",
+      "description": "Plans for increasing clean power for communities.",
+      "link": "#"
+    },
+    {
+      "title": "Green Transport",
+      "image": "assets/logo.png",
+      "category": "New clean energy buses!",
+      "description": "Creating smarter, cleaner modes of transport.",
+      "link": "#"
+    }
+  ]
+}
+

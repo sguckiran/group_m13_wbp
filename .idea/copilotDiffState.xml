@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/app/public/json/homepage.json">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/public/json/homepage.json" />
+              <option name="updatedContent" value="{&#10;  &quot;hero&quot;: {&#10;    &quot;title&quot;: &quot;Shaping a Sustainable Future for Norwich&quot;,&#10;    &quot;subtitle&quot;: &quot;With the Sustainability Advisory Committee, learn how local policies align with the UN Sustainable Development Goals.&quot;,&#10;    &quot;button&quot;: { &quot;text&quot;: &quot;find out more&quot;, &quot;href&quot;: &quot;#current-goals&quot; },&#10;    &quot;image&quot;: &quot;assets/logo.png&quot;&#10;  },&#10;  &quot;goals&quot;: [&#10;    {&#10;      &quot;title&quot;: &quot;Climate Action&quot;,&#10;      &quot;image&quot;: &quot;assets/logo.png&quot;,&#10;      &quot;category&quot;: &quot;Replanting our forests!&quot;,&#10;      &quot;description&quot;: &quot;Taking necessary steps to protecting our nature.&quot;,&#10;      &quot;link&quot;: &quot;#&quot;&#10;    },&#10;    {&#10;      &quot;title&quot;: &quot;Sustainable Energy&quot;,&#10;      &quot;image&quot;: &quot;assets/logo.png&quot;,&#10;      &quot;category&quot;: &quot;More solar-panels planned!&quot;,&#10;      &quot;description&quot;: &quot;Plans for increasing clean power for communities.&quot;,&#10;      &quot;link&quot;: &quot;#&quot;&#10;    },&#10;    {&#10;      &quot;title&quot;: &quot;Green Transport&quot;,&#10;      &quot;image&quot;: &quot;assets/logo.png&quot;,&#10;      &quot;category&quot;: &quot;New clean energy buses!&quot;,&#10;      &quot;description&quot;: &quot;Creating smarter, cleaner modes of transport.&quot;,&#10;      &quot;link&quot;: &quot;#&quot;&#10;    }&#10;  ]&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
