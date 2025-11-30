@@ -6,6 +6,10 @@ async function loadJSON(path) {
   return res.json();
 }
 
+let headerRaw = null;
+let translations = null;
+window.currentLang = window.currentLang || 'English';
+
 function buildHeader(data) {
   const header = document.getElementById('site-header');
   header.innerHTML = '';
@@ -28,7 +32,7 @@ function buildHeader(data) {
     const li = document.createElement('li');
     li.textContent = l;
     li.dataset.lang = l;
-    if (idx === 0) li.classList.add('active');
+    if (l === window.currentLang || (idx === 0 && !window.currentLang)) li.classList.add('active');
     langUl.appendChild(li);
   });
   header.appendChild(langUl);
@@ -67,6 +71,12 @@ function buildHeader(data) {
       if (activeLang) activeLang.classList.remove('active');
       element.classList.add('active');
       activeLang = element;
+      const selected = element.dataset.lang;
+      if (selected && selected !== window.currentLang) {
+        window.currentLang = selected;
+        // notify other scripts to re-render with the new language
+        document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: selected } }));
+      }
     });
   });
 }
@@ -74,8 +84,34 @@ function buildHeader(data) {
 // initialize header on DOM ready
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const data = await loadJSON('json/header.json');
-    buildHeader(data);
+    // load translations first (optional file)
+    try {
+      translations = await loadJSON('json/translations.json');
+      window.TRANSLATIONS = translations;
+      // notify other scripts that translations are now available
+      document.dispatchEvent(new CustomEvent('translationsLoaded', { detail: { translations } }));
+
+    } catch (e) {
+      translations = null;
+      console.warn('translations.json not found or failed to load; continuing without translations');
+    }
+
+    headerRaw = await loadJSON('json/header.json');
+    const toRender = (typeof window.translateData === 'function' && translations)
+      ? window.translateData(headerRaw, window.currentLang, translations)
+      : headerRaw;
+
+    buildHeader(toRender);
+
+    // also react to external languageChanged events to update header
+    document.addEventListener('languageChanged', (ev) => {
+      if (!headerRaw) return;
+      const lang = ev && ev.detail && ev.detail.lang ? ev.detail.lang : window.currentLang;
+      const r = (typeof window.translateData === 'function' && translations)
+        ? window.translateData(headerRaw, lang, translations)
+        : headerRaw;
+      buildHeader(r);
+    });
   } catch (err) {
     console.warn('Could not load header.json, header will not be dynamic.', err);
   }

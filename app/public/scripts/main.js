@@ -6,6 +6,11 @@ async function loadJSON(path) {
   return res.json();
 }
 
+let homepageRaw = null;
+let footerRaw = null;
+let translations = null;
+window.currentLang = window.currentLang || 'English';
+
 function createHeroSection(hero) {
   const container = document.createElement('div');
   container.className = 'hero-inner';
@@ -25,7 +30,12 @@ function createHeroSection(hero) {
     const a = document.createElement('a');
     a.className = 'hero-button';
     a.href = hero.button.href || '#';
-    a.textContent = hero.button.text || 'Learn more';
+    // translate the default button text if translator is available
+    const dict = translations || window.TRANSLATIONS || null;
+    const defaultBtn = (typeof window.translateData === 'function' && dict)
+      ? window.translateData(hero.button.text || 'Learn more', window.currentLang, dict)
+      : (hero.button.text || 'Learn more');
+    a.textContent = defaultBtn;
     text.appendChild(a);
   }
 
@@ -78,7 +88,12 @@ function createGoalCard(goal) {
   if (goal.link) {
     const a = document.createElement('a');
     a.href = goal.link;
-    a.textContent = 'Read more';
+    // translate the 'Read more' label if translator is available
+    const dict = translations || window.TRANSLATIONS || null;
+    const readMore = (typeof window.translateData === 'function' && dict)
+      ? window.translateData('Read more', window.currentLang, dict)
+      : 'Read more';
+    a.textContent = goal.linkLabel || readMore;
     body.appendChild(a);
   }
 
@@ -86,31 +101,92 @@ function createGoalCard(goal) {
   return card;
 }
 
-async function initHomepage() {
+async function renderHomepageFromRaw() {
+  if (!homepageRaw) return;
   try {
-    const data = await loadJSON('json/homepage.json');
+    window.__diagLog && window.__diagLog('renderHomepageFromRaw: start');
+  } catch(e) {}
+  const dict = translations || window.TRANSLATIONS || null;
+  const data = (typeof window.translateData === 'function' && dict)
+    ? window.translateData(homepageRaw, window.currentLang, dict)
+    : homepageRaw;
 
-    const heroEl = document.getElementById('hero');
+  const heroEl = document.getElementById('hero');
+  if (heroEl) {
     heroEl.innerHTML = '';
     heroEl.appendChild(createHeroSection(data.hero || {}));
+  }
 
-    const goalsContainer = document.getElementById('goals-container');
+  const goalsContainer = document.getElementById('goals-container');
+  if (goalsContainer) {
     goalsContainer.innerHTML = '';
-
     (data.goals || []).forEach(goal => {
       goalsContainer.appendChild(createGoalCard(goal));
     });
+  }
+  try { window.__diagLog && window.__diagLog('renderHomepageFromRaw: done'); } catch(e) {}
+}
 
-    // footer
-    const footerData = await loadJSON('json/footer.json');
-    renderFooter(footerData);
+async function initHomepage() {
+  try {
+    window.__diagLog && window.__diagLog('initHomepage: start');
+    try {
+      translations = await loadJSON('json/translations.json');
+      window.__diagLog && window.__diagLog('initHomepage: translations loaded');
+    } catch (e) {
+      translations = window.TRANSLATIONS || null;
+      window.__diagLog && window.__diagLog('initHomepage: translations missing or failed; using existing');
+    }
+
+    // if header.js or another script loaded TRANSLATIONS after ours started, pick it up
+    if (!translations && window.TRANSLATIONS) translations = window.TRANSLATIONS;
+
+    homepageRaw = await loadJSON('json/homepage.json');
+    window.__diagLog && window.__diagLog('initHomepage: homepage.json loaded');
+    footerRaw = await loadJSON('json/footer.json');
+    window.__diagLog && window.__diagLog('initHomepage: footer.json loaded');
+
+    await renderHomepageFromRaw();
+    renderFooter((typeof window.translateData === 'function' && (translations || window.TRANSLATIONS))
+      ? window.translateData(footerRaw, window.currentLang, (translations || window.TRANSLATIONS))
+      : footerRaw);
+
+    // listen for language changes
+    document.addEventListener('languageChanged', async (ev) => {
+      const lang = ev && ev.detail && ev.detail.lang ? ev.detail.lang : window.currentLang;
+      window.currentLang = lang;
+      // refresh local translations reference from global if available
+      if (window.TRANSLATIONS) translations = window.TRANSLATIONS;
+      window.__diagLog && window.__diagLog('initHomepage: languageChanged -> ' + lang);
+      await renderHomepageFromRaw();
+      renderFooter((typeof window.translateData === 'function' && (translations || window.TRANSLATIONS))
+        ? window.translateData(footerRaw, lang, (translations || window.TRANSLATIONS))
+        : footerRaw);
+    });
+
+    // react when translations are loaded by header (or another script)
+    document.addEventListener('translationsLoaded', (ev) => {
+      try {
+        translations = ev && ev.detail && ev.detail.translations ? ev.detail.translations : window.TRANSLATIONS || translations;
+        window.__diagLog && window.__diagLog('initHomepage: translationsLoaded event received');
+        // re-render with the new translations
+        renderHomepageFromRaw();
+        renderFooter((typeof window.translateData === 'function' && translations)
+          ? window.translateData(footerRaw, window.currentLang, translations)
+          : footerRaw);
+      } catch (e) {
+        console.error('translationsLoaded handler error', e);
+      }
+    });
   } catch (err) {
     console.error(err);
+    window.__diagLog && window.__diagLog('initHomepage: error - ' + (err && err.message));
   }
 }
 
 function renderFooter(data) {
   const footer = document.getElementById('site-footer');
+  if (!footer) return;
   footer.innerHTML = '';
 
   const wrapper = document.createElement('div');
@@ -153,3 +229,16 @@ document.addEventListener('DOMContentLoaded', () => {
     initHomepage();
   }
 });
+
+// Failsafe: if the DOM is already ready (script loaded late), start immediately once
+if (document.readyState !== 'loading') {
+  try {
+    if (!window.__homepageInitiated && document.getElementById('hero')) {
+      window.__homepageInitiated = true;
+      initHomepage();
+    }
+  } catch (e) {
+    console.error('homepage immediate init failed', e);
+    window.__diagLog && window.__diagLog('homepage immediate init failed: ' + (e && e.message));
+  }
+}

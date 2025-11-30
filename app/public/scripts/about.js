@@ -6,8 +6,14 @@ async function loadJSON(path) {
   return res.json();
 }
 
+let aboutRaw = null;
+let footerRaw = null;
+let translations = null;
+window.currentLang = window.currentLang || 'English';
+
 function renderHero(hero) {
   const el = document.getElementById('about-hero');
+  if (!el) return;
   el.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'about-hero-inner';
@@ -36,6 +42,7 @@ function renderHero(hero) {
 
 function renderHistory(text) {
   const el = document.getElementById('history');
+  if (!el) return;
   el.innerHTML = '';
   const h2 = document.createElement('h2');
   h2.textContent = 'Our History';
@@ -51,6 +58,7 @@ function renderHistory(text) {
 
 function renderTeam(list) {
   const el = document.getElementById('team');
+  if (!el) return;
   el.innerHTML = '';
   const h2 = document.createElement('h2');
   h2.textContent = 'Our Team';
@@ -85,22 +93,51 @@ function renderTeam(list) {
   });
 }
 
+async function renderAboutFromRaw() {
+  if (!aboutRaw) return;
+  const data = (typeof window.translateData === 'function' && translations)
+    ? window.translateData(aboutRaw, window.currentLang, translations)
+    : aboutRaw;
+
+  renderHero(data.hero || {});
+  renderHistory(data.history || '');
+  renderTeam(data.team || []);
+}
+
 async function initAbout() {
   try {
-    const data = await loadJSON('json/about.json');
-    renderHero(data.hero || {});
-    renderHistory(data.history || '');
-    renderTeam(data.team || []);
+    try {
+      translations = await loadJSON('json/translations.json');
+    } catch (e) {
+      translations = window.TRANSLATIONS || null;
+    }
 
-    const footerData = await loadJSON('json/footer.json');
+    aboutRaw = await loadJSON('json/about.json');
+    footerRaw = await loadJSON('json/footer.json');
+
+    await renderAboutFromRaw();
+
     // reuse the footer renderer used by main.js if available
     if (typeof renderFooter === 'function') {
-      renderFooter(footerData);
+      renderFooter((typeof window.translateData === 'function' && translations)
+        ? window.translateData(footerRaw, window.currentLang, translations)
+        : footerRaw);
     } else {
       // basic footer fallback
       const footer = document.getElementById('site-footer');
-      footer.textContent = footerData.copyright || '';
+      if (footer) footer.textContent = footerRaw.copyright || '';
     }
+
+    document.addEventListener('languageChanged', async (ev) => {
+      const lang = ev && ev.detail && ev.detail.lang ? ev.detail.lang : window.currentLang;
+      window.currentLang = lang;
+      await renderAboutFromRaw();
+      if (typeof renderFooter === 'function') {
+        renderFooter((typeof window.translateData === 'function' && translations)
+          ? window.translateData(footerRaw, lang, translations)
+          : footerRaw);
+      }
+    });
   } catch (err) {
     console.error(err);
   }
