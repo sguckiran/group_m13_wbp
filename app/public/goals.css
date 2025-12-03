@@ -1,0 +1,27 @@
+h1 {
+    text-align: center;
+}
+
+
+section {
+    display: flex;
+}
+
+img {
+    display: inline;
+    padding: 10px;
+}
+
+#issue img {
+
+}
+
+#goal img{
+    float: right;
+}
+
+p {
+    display: inline;
+    padding: 0 10px;
+    font-size: x-large;
+}
