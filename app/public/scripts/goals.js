@@ -1,7 +1,7 @@
 (function() {
-  console.log('>>> about.js loading <<<');
+  console.log('>>> goals.js loading <<<');
 
-  var aboutData = null;
+  var goalsData = null;
   var footerData = null;
   var translationsData = null;
 
@@ -24,33 +24,33 @@
   }
 
   function renderHero(hero) {
-    var el = document.getElementById('about-hero');
+    var el = document.getElementById('goals-hero');
     if (!el) {
-      console.error('about-hero element not found!');
+      console.error('goals-hero element not found!');
       return;
     }
     el.innerHTML = '';
 
     var wrap = document.createElement('div');
-    wrap.className = 'about-hero-inner';
+    wrap.className = 'goals-hero-inner';
 
     var img = document.createElement('img');
-    img.className = 'about-hero-img';
+    img.className = 'goals-hero-img';
     img.src = hero.image || 'assets/logo.png';
-    img.alt = hero.title || 'About';
+    img.alt = hero.title || 'Our Goals';
     wrap.appendChild(img);
 
     var overlay = document.createElement('div');
-    overlay.className = 'about-hero-overlay';
+    overlay.className = 'goals-hero-overlay';
 
     var title = document.createElement('h1');
-    title.className = 'about-hero-title';
-    title.textContent = hero.title || 'About Us';
+    title.className = 'goals-hero-title';
+    title.textContent = hero.title || 'Our Goals';
     overlay.appendChild(title);
 
     if (hero.subtitle) {
       var sub = document.createElement('p');
-      sub.className = 'about-hero-subtitle';
+      sub.className = 'goals-hero-subtitle';
       sub.textContent = hero.subtitle;
       overlay.appendChild(sub);
     }
@@ -60,86 +60,101 @@
     console.log('✓ Hero rendered');
   }
 
-  function renderHistory(text) {
-    var el = document.getElementById('history');
+  function renderIntro(text) {
+    var el = document.getElementById('goals-intro');
     if (!el) {
-      console.error('history element not found!');
+      console.error('goals-intro element not found!');
       return;
     }
     el.innerHTML = '';
-
-    var h2 = document.createElement('h2');
-    h2.textContent = 'Our History';
-    el.appendChild(h2);
 
     var p = document.createElement('p');
-    p.className = 'about-history-text';
+    p.className = 'goals-intro-text';
     p.textContent = text;
     el.appendChild(p);
-    console.log('✓ History rendered');
+    console.log('✓ Intro rendered');
   }
 
-  function renderTeam(list) {
-    var el = document.getElementById('team');
+  function renderGoalsList(goals) {
+    var el = document.getElementById('goals-list');
     if (!el) {
-      console.error('team element not found!');
+      console.error('goals-list element not found!');
       return;
     }
     el.innerHTML = '';
 
-    var h2 = document.createElement('h2');
-    h2.textContent = 'Our Team';
-    el.appendChild(h2);
+    for (var i = 0; i < goals.length; i++) {
+      var goal = goals[i];
+      var item = document.createElement('div');
+      item.className = 'goal-item';
 
-    var container = document.createElement('div');
-    container.className = 'team-container';
+      var header = document.createElement('div');
+      header.className = 'goal-header';
 
-    for (var i = 0; i < list.length; i++) {
-      var member = list[i];
-      var card = document.createElement('div');
-      card.className = 'team-card';
+      if (goal.icon) {
+        var icon = document.createElement('img');
+        icon.className = 'goal-icon';
+        icon.src = goal.icon;
+        icon.alt = goal.title || '';
+        header.appendChild(icon);
+      }
 
-      var img = document.createElement('img');
-      img.className = 'team-avatar';
-      img.src = member.avatar || 'assets/logo.png';
-      img.alt = member.name || '';
-      card.appendChild(img);
+      var titleEl = document.createElement('h3');
+      titleEl.className = 'goal-title';
+      titleEl.textContent = goal.title || '';
+      header.appendChild(titleEl);
 
-      var name = document.createElement('div');
-      name.className = 'team-name';
-      name.textContent = member.name || '';
-      card.appendChild(name);
+      item.appendChild(header);
 
-      var role = document.createElement('div');
-      role.className = 'team-role';
-      role.textContent = member.role || '';
-      card.appendChild(role);
+      if (goal.description) {
+        var desc = document.createElement('p');
+        desc.className = 'goal-description';
+        desc.textContent = goal.description;
+        item.appendChild(desc);
+      }
 
-      container.appendChild(card);
+      if (goal.targets && goal.targets.length > 0) {
+        var targetsDiv = document.createElement('div');
+        targetsDiv.className = 'goal-targets';
+
+        var targetsTitle = document.createElement('h4');
+        targetsTitle.textContent = 'Key Targets:';
+        targetsDiv.appendChild(targetsTitle);
+
+        var ul = document.createElement('ul');
+        for (var j = 0; j < goal.targets.length; j++) {
+          var li = document.createElement('li');
+          li.textContent = goal.targets[j];
+          ul.appendChild(li);
+        }
+        targetsDiv.appendChild(ul);
+        item.appendChild(targetsDiv);
+      }
+
+      el.appendChild(item);
     }
 
-    el.appendChild(container);
-    console.log('✓ Team rendered with', list.length, 'members');
+    console.log('✓ Goals list rendered with', goals.length, 'items');
   }
 
   function render() {
     console.log('>>> RENDER CALLED <<<');
-    console.log('aboutData:', aboutData);
+    console.log('goalsData:', goalsData);
 
-    if (!aboutData) {
-      console.error('No about data to render!');
+    if (!goalsData) {
+      console.error('No goals data to render!');
       return;
     }
 
-    var data = aboutData;
+    var data = goalsData;
     if (window.translateData && translationsData && window.currentLang) {
       console.log('Translating to:', window.currentLang);
-      data = window.translateData(aboutData, window.currentLang, translationsData);
+      data = window.translateData(goalsData, window.currentLang, translationsData);
     }
 
     renderHero(data.hero || {});
-    renderHistory(data.history || '');
-    renderTeam(data.team || []);
+    renderIntro(data.intro || '');
+    renderGoalsList(data.goals || []);
 
     if (footerData) {
       var footerEl = document.getElementById('site-footer');
@@ -193,10 +208,10 @@
     translationsData = window.TRANSLATIONS || null;
     console.log('Translations available:', !!translationsData);
 
-    loadJSON('json/about.json')
+    loadJSON('json/goals.json')
       .then(function(data) {
-        console.log('✓ About JSON loaded');
-        aboutData = data;
+        console.log('✓ Goals JSON loaded');
+        goalsData = data;
         return loadJSON('json/footer.json');
       })
       .then(function(data) {
@@ -207,7 +222,7 @@
       })
       .catch(function(error) {
         console.error('❌ INIT FAILED:', error);
-        alert('Failed to load about page data. Check console.');
+        alert('Failed to load goals page data. Check console.');
       });
 
     document.addEventListener('languageChanged', function(ev) {
@@ -229,3 +244,4 @@
   }
 
 })();
+

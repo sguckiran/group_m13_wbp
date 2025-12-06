@@ -35,7 +35,6 @@ const server = http.createServer((req, res) => {
 		if (reqPath === '/') reqPath = '/index.html';
 		const filePath = path.join(publicDir, reqPath);
 
-		// Prevent path traversal
 		if (!filePath.startsWith(publicDir)) {
 			res.writeHead(403, { 'Content-Type': 'text/plain; charset=UTF-8' });
 			return res.end('403 Forbidden');

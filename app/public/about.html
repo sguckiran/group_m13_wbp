@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>About - Sustainability Advisory Committee</title>
   <link rel="stylesheet" href="header.css">
+  <!-- about page specific styles -->
+  <link rel="stylesheet" href="about.css">
 </head>
 
 <body>
@@ -28,6 +30,23 @@
   </main>
 
   <footer id="site-footer"></footer>
+
+  <!-- Embedded fallback JSON so the About page still renders if fetch fails -->
+  <script id="__about_data" type="application/json">
+{
+  "hero": {
+    "title": "About Us",
+    "subtitle": "Shaping a Sustainable Future for Norwich",
+    "image": "assets/logo.png"
+  },
+  "history": "The Sustainability Advisory Committee (SAC) was founded in 2021 by a small group of Norwich-based environmental advocates and university researchers. What began as a volunteer-led discussion group soon evolved into a local advisory body, helping policy makers, councils, and organizations align with the United Nations Sustainable Development Goals (SDGs). We hope to guide Norwich and its neighbouring areas toward a greener, fairer future!",
+  "team": [
+    { "name": "Alex Green", "role": "Chair", "avatar": "assets/logo.png" },
+    { "name": "Jamie Lee", "role": "Coordinator", "avatar": "assets/logo.png" },
+    { "name": "Sam Patel", "role": "Outreach Lead", "avatar": "assets/logo.png" }
+  ]
+}
+  </script>
 
   <script src="scripts/translator.js"></script>
   <script src="scripts/header.js"></script>

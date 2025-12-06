@@ -1,13 +1,13 @@
 {
   "hero": {
     "title": "About Us",
-    "image": "assets/about-hero.jpg"
+    "subtitle": "Shaping a Sustainable Future for Norwich",
+    "image": "assets/logo.png"
   },
   "history": "The Sustainability Advisory Committee (SAC) was founded in 2021 by a small group of Norwich-based environmental advocates and university researchers. What began as a volunteer-led discussion group soon evolved into a local advisory body, helping policy makers, councils, and organizations align with the United Nations Sustainable Development Goals (SDGs). We hope to guide Norwich and its neighbouring areas toward a greener, fairer future!",
   "team": [
-    { "name": "Alex Green", "role": "Chair", "avatar": "assets/avatar1.png" },
-    { "name": "Jamie Lee", "role": "Coordinator", "avatar": "assets/avatar2.png" },
-    { "name": "Sam Patel", "role": "Outreach Lead", "avatar": "assets/avatar3.png" }
+    { "name": "Alex Green", "role": "Chair", "avatar": "assets/logo.png" },
+    { "name": "Jamie Lee", "role": "Coordinator", "avatar": "assets/logo.png" },
+    { "name": "Sam Patel", "role": "Outreach Lead", "avatar": "assets/logo.png" }
   ]
 }
-
