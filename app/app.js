@@ -1,67 +1,123 @@
-const http = require('http');
+const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
+const app = express();
 const publicDir = path.join(__dirname, 'public');
+const dataDir = path.join(__dirname, 'data');
 const port = parseInt(process.env.PORT, 10) || 8080;
 
-const mimeTypes = {
-	"html": "text/html; charset=UTF-8",
-	"js": "application/javascript; charset=UTF-8",
-	"css": "text/css; charset=UTF-8",
-	"json": "application/json; charset=UTF-8",
-	"png": "image/png",
-	"jpg": "image/jpeg",
-	"jpeg": "image/jpeg",
-	"gif": "image/gif",
-	"svg": "image/svg+xml",
-	"ico": "image/x-icon",
-	"txt": "text/plain; charset=UTF-8"
-};
-
-function send404(res) {
-	res.writeHead(404, { 'Content-Type': 'text/plain; charset=UTF-8' });
-	res.end('404 Not Found');
+// Ensure data directory exists
+if (!fs.existsSync(dataDir)) {
+	fs.mkdirSync(dataDir, { recursive: true });
 }
 
-function send500(res, err) {
-	res.writeHead(500, { 'Content-Type': 'text/plain; charset=UTF-8' });
-	res.end('500 Internal Server Error\n' + String(err));
-}
+// Middleware to parse JSON bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const server = http.createServer((req, res) => {
-	try {
-		let reqPath = decodeURIComponent(req.url.split('?')[0] || '/');
-		if (reqPath === '/') reqPath = '/index.html';
-		const filePath = path.join(publicDir, reqPath);
+// Serve static files from public directory
+app.use(express.static(publicDir));
 
-		if (!filePath.startsWith(publicDir)) {
-			res.writeHead(403, { 'Content-Type': 'text/plain; charset=UTF-8' });
-			return res.end('403 Forbidden');
-		}
+// API endpoint for signup form submission
+app.post('/api/signup', (req, res) => {
+	console.log('Received signup request:', req.body);
 
-		fs.stat(filePath, (err, stats) => {
-			if (err) return send404(res);
-			if (stats.isDirectory()) {
-				const index = path.join(filePath, 'index.html');
-				fs.access(index, fs.constants.R_OK, (e) => {
-					if (e) return send404(res);
-					res.writeHead(200, { 'Content-Type': 'text/html; charset=UTF-8' });
-					fs.createReadStream(index).pipe(res);
-				});
-				return;
-			}
+	const { firstName, lastName, email, comments, timestamp } = req.body;
 
-			const ext = path.extname(filePath).slice(1).toLowerCase();
-			const contentType = mimeTypes[ext] || 'application/octet-stream';
-			res.writeHead(200, { 'Content-Type': contentType });
-			fs.createReadStream(filePath).on('error', (e) => send500(res, e)).pipe(res);
+	// Server-side validation
+	if (!firstName || !lastName || !email) {
+		return res.status(400).json({
+			success: false,
+			message: 'First name, last name, and email are required.'
 		});
-	} catch (e) {
-		send500(res, e);
+	}
+
+	// Validate email format
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	if (!emailRegex.test(email)) {
+		return res.status(400).json({
+			success: false,
+			message: 'Invalid email format.'
+		});
+	}
+
+	// Sanitize inputs (basic sanitization)
+	const sanitizedData = {
+		firstName: firstName.trim().replace(/[<>]/g, ''),
+		lastName: lastName.trim().replace(/[<>]/g, ''),
+		email: email.trim().toLowerCase(),
+		comments: comments ? comments.trim().replace(/[<>]/g, '') : '',
+		timestamp: timestamp || new Date().toISOString()
+	};
+
+	// Read existing signups
+	const signupsFile = path.join(dataDir, 'signups.json');
+	let signups = [];
+
+	try {
+		if (fs.existsSync(signupsFile)) {
+			const fileContent = fs.readFileSync(signupsFile, 'utf-8');
+			signups = JSON.parse(fileContent);
+		}
+	} catch (err) {
+		console.error('Error reading signups file:', err);
+	}
+
+	// Check if email already exists
+	const existingSignup = signups.find(s => s.email === sanitizedData.email);
+	if (existingSignup) {
+		return res.status(409).json({
+			success: false,
+			message: 'This email is already registered for our newsletter.'
+		});
+	}
+
+	// Add new signup
+	signups.push(sanitizedData);
+
+	// Save to file
+	try {
+		fs.writeFileSync(signupsFile, JSON.stringify(signups, null, 2), 'utf-8');
+		console.log('Signup saved successfully');
+
+		res.status(201).json({
+			success: true,
+			message: 'Thank you for signing up! You will receive our newsletter at ' + sanitizedData.email
+		});
+	} catch (err) {
+		console.error('Error saving signup:', err);
+		res.status(500).json({
+			success: false,
+			message: 'Failed to save your registration. Please try again.'
+		});
 	}
 });
 
-server.listen(port, () => {
+// GET endpoint to retrieve all signups (for admin purposes)
+app.get('/api/signups', (req, res) => {
+	const signupsFile = path.join(dataDir, 'signups.json');
+
+	try {
+		if (fs.existsSync(signupsFile)) {
+			const fileContent = fs.readFileSync(signupsFile, 'utf-8');
+			const signups = JSON.parse(fileContent);
+			res.json({ success: true, count: signups.length, signups });
+		} else {
+			res.json({ success: true, count: 0, signups: [] });
+		}
+	} catch (err) {
+		console.error('Error reading signups:', err);
+		res.status(500).json({ success: false, message: 'Error retrieving signups' });
+	}
+});
+
+// 404 handler
+app.use((req, res) => {
+	res.status(404).sendFile(path.join(publicDir, 'index.html'));
+});
+
+app.listen(port, () => {
 	console.log(`Server running at http://localhost:${port}/`);
+	console.log(`Data directory: ${dataDir}`);
 });

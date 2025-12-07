@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sign Up - Sustainability Advisory Committee</title>
+  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="signup.css">
+</head>
+
+<body>
+  <header id="site-header">
+    <!-- header content will be injected from json -->
+  </header>
+
+  <main>
+    <section id="signup-hero">
+      <!-- hero injected dynamically -->
+    </section>
+
+    <section id="signup-form-section">
+      <div class="form-container">
+        <form id="signup-form" novalidate>
+          <div class="form-group">
+            <label for="firstName">First Name *</label>
+            <input type="text" id="firstName" name="firstName" required>
+            <span class="error-message" id="firstName-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name *</label>
+            <input type="text" id="lastName" name="lastName" required>
+            <span class="error-message" id="lastName-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required>
+            <span class="error-message" id="email-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="comments">Comments</label>
+            <textarea id="comments" name="comments" rows="5"></textarea>
+            <span class="error-message" id="comments-error"></span>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" id="submit-btn">Sign Up</button>
+          </div>
+        </form>
+
+        <div id="form-message" class="form-message" style="display:none;">
+          <p id="message-text"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="scripts/translator.js"></script>
+  <script src="scripts/header.js"></script>
+  <script src="scripts/signup.js"></script>
+</body>
+
+</html>

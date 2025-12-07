@@ -4,9 +4,7 @@
   "nav": [
     { "label": "Home", "href": "index.html" },
     { "label": "Our Goals", "href": "goals.html" },
-    { "label": "About Us", "href": "about.html" },
-    { "label": "Support", "href": "index.html#support" }
+    { "label": "About Us", "href": "about.html" }
   ],
-  "button": { "label": "Sign Up", "href": "#" }
+  "button": { "label": "Sign Up", "href": "signup.html" }
 }
-
