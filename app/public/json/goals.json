@@ -4,68 +4,39 @@
     "subtitle": "Driving sustainable change through concrete action and community engagement",
     "image": "assets/logo.png"
   },
-  "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "intro": "Our values advocate for the eradication of discrimination in work and education.",
   "goals": [
     {
-      "title": "Environmental Conservation",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel sapien ac turpis hendrerit facilisis. Nullam sit amet consectetur purus. Vivamus euismod nunc in tortor ultricies, vitae consequat magna laoreet.",
+      "title": "Quality Education",
+      "description": "Provide equal and affordable opportunities in education, and improve education outcomes.",
       "icon": "assets/logo.png",
       "targets": [
-        "Reduce carbon emissions by 40% by 2030",
-        "Plant 10,000 trees across the region",
-        "Establish 5 new conservation areas"
+        "Provide at least 25% of schools in underdeveloped areas with quality teaching resources",
+        "Build 100 new schools in areas without good education",
+        "Ensure opportunities for continued study past the age of 18"
       ]
     },
     {
-      "title": "Renewable Energy Transition",
-      "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "title": "Decent Work",
+      "description": "Opportunities for everyone to get work that is productive and delivers a fair income, security in the workplace and social protection for families, better prospects for personal development and social integration.",
       "icon": "assets/logo.png",
       "targets": [
-        "Achieve 75% renewable energy usage by 2028",
-        "Install solar panels on 500 buildings",
-        "Support local wind energy projects"
+        "All employers to provide safe working environments for all employees",
+        "Work place security and protection for families",
+        "Help 3/5 of unemployed people to find and keep a job with a livable wage"
       ]
     },
     {
-      "title": "Sustainable Transportation",
-      "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      "title": "Gender Equality",
+      "description": "Ensure Gender Equality is upheld withing work and education.",
       "icon": "assets/logo.png",
       "targets": [
-        "Expand bike lane network by 200km",
-        "Convert 80% of public buses to electric",
-        "Create 15 new park-and-ride facilities"
-      ]
-    },
-    {
-      "title": "Community Education",
-      "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.",
-      "icon": "assets/logo.png",
-      "targets": [
-        "Conduct 50 sustainability workshops annually",
-        "Reach 10,000 students through school programs",
-        "Launch online resource platform"
-      ]
-    },
-    {
-      "title": "Waste Reduction",
-      "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
-      "icon": "assets/logo.png",
-      "targets": [
-        "Achieve 70% recycling rate by 2027",
-        "Eliminate single-use plastics in public facilities",
-        "Establish 20 community composting sites"
-      ]
-    },
-    {
-      "title": "Green Infrastructure",
-      "description": "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus.",
-      "icon": "assets/logo.png",
-      "targets": [
-        "Create 25 green roofs on municipal buildings",
-        "Install 100 rain gardens for stormwater management",
-        "Develop urban forest management plan"
+        "Minimise the Gender Pay Gap",
+        "Lower discrimination based on gender, in the work place and education by at least 75%",
+        "Make payed maternity leave a legal right"
       ]
     }
+
   ]
 }
 

@@ -7,24 +7,24 @@
   },
   "goals": [
     {
-      "title": "Climate Action",
+      "title": "Quality Education",
       "image": "assets/logo.png",
-      "category": "Replanting our forests!",
-      "description": "Taking necessary steps to protecting our nature.",
+      "category": "Building new schools!",
+      "description": "Providing Education for all.",
       "link": "#"
     },
     {
-      "title": "Sustainable Energy",
+      "title": "Decent Work",
       "image": "assets/logo.png",
-      "category": "More solar-panels planned!",
-      "description": "Plans for increasing clean power for communities.",
+      "category": "Better job opportunities!",
+      "description": "Work place security and protection for families.",
       "link": "#"
     },
     {
-      "title": "Green Transport",
+      "title": "Gender Equality",
       "image": "assets/logo.png",
-      "category": "New clean energy buses!",
-      "description": "Creating smarter, cleaner modes of transport.",
+      "category": "Improve Women's rights!",
+      "description": "Lower discrimination based on gender.",
       "link": "#"
     }
   ]
