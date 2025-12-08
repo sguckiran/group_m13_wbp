@@ -5,8 +5,9 @@ const path = require('path');
 const app = express();
 const port = 8080;
 
-if (!fs.existsSync('data')) {
-    fs.mkdirSync('data');
+const dataDir = path.join(__dirname, 'data');
+if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir);
 }
 
 app.use(express.json());
@@ -39,11 +40,17 @@ app.post('/api/signup', (req, res) => {
         timestamp: timestamp || new Date().toISOString()
     };
 
-    const file = path.join(__dirname, 'data', 'signups.json');
+    const file = path.join(dataDir, 'signups.json');
     let signups = [];
 
     if (fs.existsSync(file)) {
-        signups = JSON.parse(fs.readFileSync(file, 'utf-8'));
+        try {
+            const raw = fs.readFileSync(file, 'utf-8').trim();
+            signups = raw ? JSON.parse(raw) : [];
+            if (!Array.isArray(signups)) signups = [];
+        } catch (err) {
+            signups = [];
+        }
     }
 
     if (signups.find(s => s.email === data.email)) {
@@ -63,10 +70,15 @@ app.post('/api/signup', (req, res) => {
 });
 
 app.get('/api/signups', (req, res) => {
-    const file = path.join(__dirname, 'data', 'signups.json');
+    const file = path.join(dataDir, 'signups.json');
     if (fs.existsSync(file)) {
-        const signups = JSON.parse(fs.readFileSync(file, 'utf-8'));
-        res.json({ success: true, count: signups.length, signups });
+        try {
+            const raw = fs.readFileSync(file, 'utf-8').trim();
+            const signups = raw ? JSON.parse(raw) : [];
+            res.json({ success: true, count: signups.length, signups });
+        } catch (err) {
+            res.json({ success: true, count: 0, signups: [] });
+        }
     } else {
         res.json({ success: true, count: 0, signups: [] });
     }
