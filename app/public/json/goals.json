@@ -2,7 +2,7 @@
   "hero": {
     "title": "Our Goals",
     "subtitle": "Driving sustainable change through concrete action and community engagement",
-    "image": "assets/logo.png"
+    "image": "assets/goals.jpg"
   },
   "intro": "Our values advocate for the eradication of discrimination in work and education.",
   "goals": [
@@ -39,4 +39,3 @@
 
   ]
 }
-

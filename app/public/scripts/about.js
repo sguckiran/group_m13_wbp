@@ -1,34 +1,19 @@
 (function() {
-  console.log('>>> about.js loading <<<');
-
   var aboutData = null;
   var footerData = null;
   var translationsData = null;
 
   function loadJSON(path) {
-    console.log('Fetching:', path);
     return fetch(path)
       .then(function(response) {
-        console.log('Response for', path, ':', response.status);
         if (!response.ok) throw new Error('HTTP ' + response.status);
         return response.json();
-      })
-      .then(function(data) {
-        console.log('Parsed data from', path, ':', data);
-        return data;
-      })
-      .catch(function(error) {
-        console.error('Error loading', path, ':', error);
-        throw error;
       });
   }
 
   function renderHero(hero) {
     var el = document.getElementById('about-hero');
-    if (!el) {
-      console.error('about-hero element not found!');
-      return;
-    }
+    if (!el) return;
     el.innerHTML = '';
 
     var wrap = document.createElement('div');
@@ -57,15 +42,11 @@
 
     wrap.appendChild(overlay);
     el.appendChild(wrap);
-    console.log('✓ Hero rendered');
   }
 
   function renderHistory(text) {
     var el = document.getElementById('history');
-    if (!el) {
-      console.error('history element not found!');
-      return;
-    }
+    if (!el) return;
     el.innerHTML = '';
 
     var h2 = document.createElement('h2');
@@ -76,15 +57,11 @@
     p.className = 'about-history-text';
     p.textContent = text;
     el.appendChild(p);
-    console.log('✓ History rendered');
   }
 
   function renderTeam(list) {
     var el = document.getElementById('team');
-    if (!el) {
-      console.error('team element not found!');
-      return;
-    }
+    if (!el) return;
     el.innerHTML = '';
 
     var h2 = document.createElement('h2');
@@ -119,21 +96,13 @@
     }
 
     el.appendChild(container);
-    console.log('✓ Team rendered with', list.length, 'members');
   }
 
   function render() {
-    console.log('>>> RENDER CALLED <<<');
-    console.log('aboutData:', aboutData);
-
-    if (!aboutData) {
-      console.error('No about data to render!');
-      return;
-    }
+    if (!aboutData) return;
 
     var data = aboutData;
     if (window.translateData && translationsData && window.currentLang) {
-      console.log('Translating to:', window.currentLang);
       data = window.translateData(aboutData, window.currentLang, translationsData);
     }
 
@@ -180,38 +149,27 @@
         wrapper.appendChild(right);
 
         footerEl.appendChild(wrapper);
-        console.log('✓ Footer rendered');
       }
     }
-
-    console.log('>>> RENDER COMPLETE <<<');
   }
 
   function init() {
-    console.log('>>> INIT STARTED <<<');
-
     translationsData = window.TRANSLATIONS || null;
-    console.log('Translations available:', !!translationsData);
 
     loadJSON('json/about.json')
       .then(function(data) {
-        console.log('✓ About JSON loaded');
         aboutData = data;
         return loadJSON('json/footer.json');
       })
       .then(function(data) {
-        console.log('✓ Footer JSON loaded');
         footerData = data;
-        console.log('About to render...');
         render();
       })
       .catch(function(error) {
-        console.error('❌ INIT FAILED:', error);
-        alert('Failed to load about page data. Check console.');
+        alert('Failed to load about page data.');
       });
 
     document.addEventListener('languageChanged', function(ev) {
-      console.log('Language changed:', ev.detail.lang);
       window.currentLang = ev.detail.lang;
       translationsData = window.TRANSLATIONS;
       render();
@@ -220,11 +178,9 @@
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOM ready, calling init');
       setTimeout(init, 150);
     });
   } else {
-    console.log('DOM already ready, calling init');
     setTimeout(init, 150);
   }
 

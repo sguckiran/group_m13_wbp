@@ -1,34 +1,19 @@
 (function() {
-  console.log('>>> signup.js loading <<<');
-
   var signupData = null;
   var footerData = null;
   var translationsData = null;
 
   function loadJSON(path) {
-    console.log('Fetching:', path);
     return fetch(path)
       .then(function(response) {
-        console.log('Response for', path, ':', response.status);
         if (!response.ok) throw new Error('HTTP ' + response.status);
         return response.json();
-      })
-      .then(function(data) {
-        console.log('Parsed data from', path, ':', data);
-        return data;
-      })
-      .catch(function(error) {
-        console.error('Error loading', path, ':', error);
-        throw error;
       });
   }
 
   function renderHero(hero) {
     var el = document.getElementById('signup-hero');
-    if (!el) {
-      console.error('signup-hero element not found!');
-      return;
-    }
+    if (!el) return;
     el.innerHTML = '';
 
     var wrap = document.createElement('div');
@@ -57,7 +42,6 @@
 
     wrap.appendChild(overlay);
     el.appendChild(wrap);
-    console.log('✓ Hero rendered');
   }
 
   function validateEmail(email) {
@@ -109,7 +93,6 @@
 
   function handleSubmit(ev) {
     ev.preventDefault();
-    console.log('Form submit triggered');
 
     clearErrors();
 
@@ -119,10 +102,7 @@
     isValid = validateField('email', 'Email', true) && isValid;
     isValid = validateField('comments', 'Comments', false) && isValid;
 
-    if (!isValid) {
-      console.log('Form validation failed');
-      return;
-    }
+    if (!isValid) return;
 
     var formData = {
       firstName: document.getElementById('firstName').value.trim(),
@@ -131,8 +111,6 @@
       comments: document.getElementById('comments').value.trim(),
       timestamp: new Date().toISOString()
     };
-
-    console.log('Submitting form data:', formData);
 
     var submitBtn = document.getElementById('submit-btn');
     submitBtn.disabled = true;
@@ -146,20 +124,17 @@
       body: JSON.stringify(formData)
     })
     .then(function(response) {
-      console.log('Server response status:', response.status);
       return response.json().then(function(data) {
         return { status: response.status, data: data };
       });
     })
     .then(function(result) {
-      console.log('Server response:', result);
-
       var messageDiv = document.getElementById('form-message');
       var messageText = document.getElementById('message-text');
 
       if (result.status === 200 || result.status === 201) {
         messageDiv.className = 'form-message success';
-        messageText.textContent = result.data.message || 'Thank you for signing up! You will receive our newsletter soon.';
+        messageText.textContent = result.data.message || 'Thank you for signing up!';
         document.getElementById('signup-form').reset();
       } else {
         messageDiv.className = 'form-message error';
@@ -175,8 +150,6 @@
       }, 10000);
     })
     .catch(function(error) {
-      console.error('Form submission error:', error);
-
       var messageDiv = document.getElementById('form-message');
       var messageText = document.getElementById('message-text');
 
@@ -231,18 +204,13 @@
     wrapper.appendChild(right);
 
     footerEl.appendChild(wrapper);
-    console.log('✓ Footer rendered');
   }
 
   function init() {
-    console.log('>>> INIT STARTED <<<');
-
     translationsData = window.TRANSLATIONS || null;
-    console.log('Translations available:', !!translationsData);
 
     loadJSON('json/signup.json')
       .then(function(data) {
-        console.log('✓ Signup JSON loaded');
         signupData = data;
 
         var heroData = signupData.hero || {};
@@ -254,18 +222,14 @@
         return loadJSON('json/footer.json');
       })
       .then(function(data) {
-        console.log('✓ Footer JSON loaded');
         footerData = data;
         renderFooter();
       })
-      .catch(function(error) {
-        console.error('❌ Init failed:', error);
-      });
+      .catch(function(error) {});
 
     var form = document.getElementById('signup-form');
     if (form) {
       form.addEventListener('submit', handleSubmit);
-      console.log('✓ Form submit handler attached');
 
       var fields = ['firstName', 'lastName', 'email'];
       fields.forEach(function(fieldId) {
@@ -281,7 +245,6 @@
     }
 
     document.addEventListener('languageChanged', function(ev) {
-      console.log('Language changed:', ev.detail.lang);
       window.currentLang = ev.detail.lang;
       translationsData = window.TRANSLATIONS;
 
@@ -296,11 +259,9 @@
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOM ready, calling init');
       setTimeout(init, 150);
     });
   } else {
-    console.log('DOM already ready, calling init');
     setTimeout(init, 150);
   }
 

@@ -1,41 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Sustainability Advisory Committee</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sustainability Advisory Committee</title>
+    <link rel="stylesheet" href="header.css">
+</head>
 
-        <link rel="stylesheet" href="header.css">
+<body>
 
-    </head>
+    <header id="site-header"></header>
 
-    <body>
+    <main>
+        <section id="hero"></section>
 
-        <header id="site-header">
-            <!-- header content will be injected from json -->
-        </header>
+        <section id="current-goals">
+            <h2 class="section-title">Current Goals</h2>
+            <div id="goals-container" class="goals-container"></div>
+        </section>
+    </main>
 
-        <main>
-            <section id="hero">
-                <!-- hero content populated from homepage.json -->
-            </section>
+    <footer id="site-footer"></footer>
 
-            <section id="current-goals">
-                <h2 class="section-title">Current Goals</h2>
-                <div id="goals-container" class="goals-container"></div>
-            </section>
-        </main>
+    <script src="scripts/translator.js"></script>
+    <script src="scripts/header.js"></script>
+    <script src="scripts/main.js"></script>
 
-        <footer id="site-footer">
-            <!-- footer populated from json -->
-        </footer>
-
-        <script src="scripts/translator.js"></script>
-        <script src="scripts/header.js"></script>
-        <script src="scripts/main.js"></script>
-
-    </body>
+</body>
 
 
 </html>

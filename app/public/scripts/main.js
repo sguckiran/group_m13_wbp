@@ -1,25 +1,13 @@
 (function() {
-  console.log('>>> main.js loading <<<');
-
   var homepageData = null;
   var footerData = null;
   var translationsData = null;
 
   function loadJSON(path) {
-    console.log('Fetching:', path);
     return fetch(path)
       .then(function(response) {
-        console.log('Response for', path, ':', response.status);
         if (!response.ok) throw new Error('HTTP ' + response.status);
         return response.json();
-      })
-      .then(function(data) {
-        console.log('Parsed data from', path, ':', data);
-        return data;
-      })
-      .catch(function(error) {
-        console.error('Error loading', path, ':', error);
-        throw error;
       });
   }
 
@@ -104,37 +92,32 @@
   }
 
   function render() {
-    console.log('>>> RENDER CALLED <<<');
-    console.log('homepageData:', homepageData);
-
-    if (!homepageData) {
-      console.error('No homepage data to render!');
-      return;
-    }
+    if (!homepageData) return;
 
     var data = homepageData;
     if (window.translateData && translationsData && window.currentLang) {
-      console.log('Translating to:', window.currentLang);
       data = window.translateData(homepageData, window.currentLang, translationsData);
     }
 
+    var sectionTitle = document.querySelector('.section-title');
+    if (sectionTitle && window.translateData && translationsData && window.currentLang) {
+      var originalText = 'Current Goals';
+      var translatedText = window.translateData({ text: originalText }, window.currentLang, translationsData).text || originalText;
+      sectionTitle.textContent = translatedText;
+    }
+
     var heroEl = document.getElementById('hero');
-    console.log('Hero element:', heroEl);
     if (heroEl && data.hero) {
       heroEl.innerHTML = '';
       heroEl.appendChild(createHero(data.hero));
-      console.log('✓ Hero rendered');
     }
 
     var goalsEl = document.getElementById('goals-container');
-    console.log('Goals container:', goalsEl);
-    console.log('Goals data:', data.goals);
     if (goalsEl && data.goals) {
       goalsEl.innerHTML = '';
       for (var i = 0; i < data.goals.length; i++) {
         goalsEl.appendChild(createGoalCard(data.goals[i]));
       }
-      console.log('✓ Rendered', data.goals.length, 'goals');
     }
 
     if (footerData) {
@@ -176,38 +159,27 @@
         wrapper.appendChild(right);
 
         footerEl.appendChild(wrapper);
-        console.log('✓ Footer rendered');
       }
     }
-
-    console.log('>>> RENDER COMPLETE <<<');
   }
 
   function init() {
-    console.log('>>> INIT STARTED <<<');
-
     translationsData = window.TRANSLATIONS || null;
-    console.log('Translations available:', !!translationsData);
 
     loadJSON('json/homepage.json')
       .then(function(data) {
-        console.log('✓ Homepage JSON loaded');
         homepageData = data;
         return loadJSON('json/footer.json');
       })
       .then(function(data) {
-        console.log('✓ Footer JSON loaded');
         footerData = data;
-        console.log('About to render...');
         render();
       })
       .catch(function(error) {
-        console.error('❌ INIT FAILED:', error);
-        alert('Failed to load page data. Check console.');
+        alert('Failed to load page data.');
       });
 
     document.addEventListener('languageChanged', function(ev) {
-      console.log('Language changed:', ev.detail.lang);
       window.currentLang = ev.detail.lang;
       translationsData = window.TRANSLATIONS;
       render();
@@ -216,11 +188,9 @@
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOM ready, calling init');
       setTimeout(init, 150);
     });
   } else {
-    console.log('DOM already ready, calling init');
     setTimeout(init, 150);
   }
 

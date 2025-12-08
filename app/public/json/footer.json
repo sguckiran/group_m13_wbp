@@ -2,8 +2,7 @@
   "logo": "assets/logo.png",
   "links": [
     { "label": "Language", "href": "#" },
-    { "label": "Learn More", "href": "#" },
-    { "label": "Support", "href": "#" }
+    { "label": "Learn More", "href": "about.html" }
   ],
   "copyright": "© 2025 Sustainability Advisory Committee",
   "socials": [
@@ -12,4 +11,3 @@
     { "name": "x", "href": "#" }
   ]
 }
-

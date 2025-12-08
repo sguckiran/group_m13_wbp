@@ -3,7 +3,7 @@
     "title": "Shaping a Sustainable Future for Norwich",
     "subtitle": "With the Sustainability Advisory Committee, learn how local policies align with the UN Sustainable Development Goals.",
     "button": { "text": "find out more", "href": "#current-goals" },
-    "image": "assets/logo.png"
+    "image": "assets/homepage.webp"
   },
   "goals": [
     {
@@ -11,21 +11,21 @@
       "image": "assets/logo.png",
       "category": "Building new schools!",
       "description": "Providing Education for all.",
-      "link": "#"
+      "link": "goals.html"
     },
     {
       "title": "Decent Work",
       "image": "assets/logo.png",
       "category": "Better job opportunities!",
       "description": "Work place security and protection for families.",
-      "link": "#"
+      "link": "goals.html"
     },
     {
       "title": "Gender Equality",
       "image": "assets/logo.png",
       "category": "Improve Women's rights!",
       "description": "Lower discrimination based on gender.",
-      "link": "#"
+      "link": "goals.html"
     }
   ]
 }

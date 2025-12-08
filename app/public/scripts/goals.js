@@ -1,34 +1,19 @@
 (function() {
-  console.log('>>> goals.js loading <<<');
-
   var goalsData = null;
   var footerData = null;
   var translationsData = null;
 
   function loadJSON(path) {
-    console.log('Fetching:', path);
     return fetch(path)
       .then(function(response) {
-        console.log('Response for', path, ':', response.status);
         if (!response.ok) throw new Error('HTTP ' + response.status);
         return response.json();
-      })
-      .then(function(data) {
-        console.log('Parsed data from', path, ':', data);
-        return data;
-      })
-      .catch(function(error) {
-        console.error('Error loading', path, ':', error);
-        throw error;
       });
   }
 
   function renderHero(hero) {
     var el = document.getElementById('goals-hero');
-    if (!el) {
-      console.error('goals-hero element not found!');
-      return;
-    }
+    if (!el) return;
     el.innerHTML = '';
 
     var wrap = document.createElement('div');
@@ -57,30 +42,22 @@
 
     wrap.appendChild(overlay);
     el.appendChild(wrap);
-    console.log('✓ Hero rendered');
   }
 
   function renderIntro(text) {
     var el = document.getElementById('goals-intro');
-    if (!el) {
-      console.error('goals-intro element not found!');
-      return;
-    }
+    if (!el) return;
     el.innerHTML = '';
 
     var p = document.createElement('p');
     p.className = 'goals-intro-text';
     p.textContent = text;
     el.appendChild(p);
-    console.log('✓ Intro rendered');
   }
 
   function renderGoalsList(goals) {
     var el = document.getElementById('goals-list');
-    if (!el) {
-      console.error('goals-list element not found!');
-      return;
-    }
+    if (!el) return;
     el.innerHTML = '';
 
     for (var i = 0; i < goals.length; i++) {
@@ -133,22 +110,13 @@
 
       el.appendChild(item);
     }
-
-    console.log('✓ Goals list rendered with', goals.length, 'items');
   }
 
   function render() {
-    console.log('>>> RENDER CALLED <<<');
-    console.log('goalsData:', goalsData);
-
-    if (!goalsData) {
-      console.error('No goals data to render!');
-      return;
-    }
+    if (!goalsData) return;
 
     var data = goalsData;
     if (window.translateData && translationsData && window.currentLang) {
-      console.log('Translating to:', window.currentLang);
       data = window.translateData(goalsData, window.currentLang, translationsData);
     }
 
@@ -195,38 +163,27 @@
         wrapper.appendChild(right);
 
         footerEl.appendChild(wrapper);
-        console.log('✓ Footer rendered');
       }
     }
-
-    console.log('>>> RENDER COMPLETE <<<');
   }
 
   function init() {
-    console.log('>>> INIT STARTED <<<');
-
     translationsData = window.TRANSLATIONS || null;
-    console.log('Translations available:', !!translationsData);
 
     loadJSON('json/goals.json')
       .then(function(data) {
-        console.log('✓ Goals JSON loaded');
         goalsData = data;
         return loadJSON('json/footer.json');
       })
       .then(function(data) {
-        console.log('✓ Footer JSON loaded');
         footerData = data;
-        console.log('About to render...');
         render();
       })
       .catch(function(error) {
-        console.error('❌ INIT FAILED:', error);
-        alert('Failed to load goals page data. Check console.');
+        alert('Failed to load goals page data.');
       });
 
     document.addEventListener('languageChanged', function(ev) {
-      console.log('Language changed:', ev.detail.lang);
       window.currentLang = ev.detail.lang;
       translationsData = window.TRANSLATIONS;
       render();
@@ -235,13 +192,10 @@
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOM ready, calling init');
       setTimeout(init, 150);
     });
   } else {
-    console.log('DOM already ready, calling init');
     setTimeout(init, 150);
   }
 
 })();
-

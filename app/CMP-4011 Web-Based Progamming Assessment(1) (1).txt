@@ -1,0 +1,479 @@
+Module: CMP-4011A Web-based Programming
+Assignment: 002, 102, 201- Web Application Development
+Set by: Dr Temi Alade (t.alade@uea.ac.uk)
+Date set: 01 September 2025
+Value: 60%/65%/100%
+Date due: 09 December 2025 15:00 [week 12]
+Demo date: 09 December 2025
+Returned by: 20 January 2026
+Submission point: Blackboard
+Checked by: Dr Riaz Ahmed Shaikh
+Learning outcomes
+This assignment is designed for students to demonstrate they have achieved the following learning
+outcomes:
+
+•
+•
+•
+
+•
+
+Design
+o Write and apply HTML mark-up appropriately.
+o Create CSS rules and apply to HTML documents efficiently.
+Usability
+o Present web content appropriately.
+o Write JavaScript code to handle DOM events and allow user interactions.
+Server programming
+o Write server-side JavaScript code using the NodeJS runtime environment to
+handle client requests.
+o Apply Express routing for server tasks.
+Web security
+o Implement features to address web security.
+
+Specification
+Overview
+This is a team-based assignment. The objective of this assignment is to design and develop a
+website using the following web technologies: HTML, CSS, JavaScript, as well as NodeJS, the
+JavaScript run time environment, for backend processing. You will be working in a team of three or
+four members. Trello, an online project management system, will be used to document your project
+work. The completed website (i.e. the frontend and backend code in a zip file) must be submitted
+to Blackboard on or before the due date. This assignment will be assessed via a compulsory demo
+session, to be scheduled in week 12 (date/time will be advised in due course).
+
+Background
+Sustainability1 is the ability to meet the needs of the present without compromising the ability of
+future generations to meet their own needs. It is a complex issue that encompasses a wide range of
+areas, including climate change, poverty, inequality, and environmental degradation.
+Some of the most pressing sustainability issues facing the world today include:
+▪
+
+▪
+
+▪
+▪
+
+Climate change2: The Earth's climate is changing at an unprecedented rate due in large part
+to human activities. This is causing a range of problems, including rising sea levels, more
+extreme weather events, and changes in agricultural yields.
+Poverty: Millions of people around the world live in poverty, without access to basic
+necessities such as food, water, shelter, and healthcare. This is a major barrier to sustainable
+development.
+Inequality: The gap between the rich and the poor is growing wider, both within and
+between countries. This is also a major challenge to sustainable development.
+Environmental degradation: The Earth's natural resources are being depleted at an alarming
+rate. This is leading to problems such as deforestation, soil erosion, and water pollution.
+
+To combat against climate change, the UN has called for more sustainable practices in using the
+earth’s natural resources. It has established seventeen Sustainable Development Goals3
+designed to improve the lives of populations around the world and mitigate the hazardous
+man-made effects of climate change.
+Your team has been asked to assist a local Sustainability Advisory Committee (SAC) [an
+imaginary group] to design and develop a website that can present key information about UN
+Sustainable Development Goals for their local policy makers.
+Your website can contain videos and/or audio although it is not a requirement.
+Your website must provide a means for visitors to sign up and receive regular newsletters.
+Visitors’ details such as first name, last name, email address and comments must be collected and
+stored for later use. Additional information such as interests or other personal details may be
+collected if appropriate. Considerations for GDPR and its implications will not be assessed and
+therefore can be omitted in this assignment.
+To help you get started, you can find the information about the UN’s Sustainable
+Development Goals on this web link:
+https://www.un.org/sustainabledevelopment/sustainable-development-goals/
+
+1
+
+UN sustainability - https://www.un.org/en/academic-impact/sustainability
+UN climate change: https://www.un.org/en/climatechange/what-is-climate-change
+3
+UN Sustainable Development Goals: https://www.un.org/sustainabledevelopment/sustainable-developmentgoals/
+2
+
+The task for your team is to select three (from the total of seventeen) UN’s Sustainable
+Development Goals to be the focus of the website you and your team will design and develop.
+Feel free to use the text, images, graphics, or diagrams that link to the goals you have selected on
+your website however, your website design cannot be identical or look similar to the UN website.
+Also, don’t forget, your target audience is local policy makers.
+NOTE: You will not be assessed on the amount of information being presented (i.e., the level of
+details or accuracy). However, you will be assessed on your web design (accessibility and usability),
+for example how the content is being organised and presented on the webpage. Remember, this is
+a web programming assignment rather than a web editorial assignment. How the text is organised
+and displayed is more important than the level of details being presented.
+
+Specifications:
+The website must include the following pages:
+•
+
+Home page (named as “index.html”).
+
+•
+
+A page for displaying team information (i.e., your team members), including names, short
+bio, role in this project, responsibility, and contributions (see Table 1 below as an example).
+
+•
+
+A signup form where users can use to register for receiving newsletters. The signup form
+must contain at least four fields: first name, last name, email address and comments. You
+can add more fields if you wish. Form data handling (e.g., form validation) is necessary for
+this assignment. After the form is submitted, the user should be presented with a message
+confirming their submission – indicating a successful or unsuccessful submission. A signup
+confirmation email might be sent to users after submission.
+
+•
+
+At least one page (and up to a maximum of three pages) for presenting UN Sustainable
+Development Goals you have selected.
+
+•
+
+The content of the web site must not be hard-coded, but instead, it must be written in
+JSON (see Frontend minimum requirements section below for more details).
+
+•
+
+JavaScript code should be written so that the content of each web page can be
+dynamically loaded when the page loads on a browser, for example using fetch API.
+NOTE: You will be penalised if the content is hardcoded on the HTML page.
+
+You can include any other pages where appropriate. However, your website must not go beyond 8
+pages.
+
+Frontend minimum requirements:
+The use of HTML markup for all web pages:
+•
+•
+•
+•
+
+HTML semantic mark-up should be used on all web pages, e.g., don’t use <div> for every
+single element on your page.
+No deprecated tags.
+All HTML documents should be validated.
+The webpage can contain HTML tags but the content (those can be viewed on a browser)
+**must NOT be hardcoded**. You must load the content dynamically using JavaScript.
+
+The use of CSS3 for all web pages:
+•
+•
+•
+•
+•
+
+Should be implemented in an external file. NOTE: You will be penalised if inline or embedded
+CSS is used.
+Use class and id attributes.
+Appropriate colour scheme should be used.
+**Do not** use SASS or compiled CSS/HTML
+All CSS files should be validated.
+
+The use of JavaScript for all web pages:
+•
+•
+•
+•
+
+Should be implemented in an external file. NOTE: You will be penalised if embedded
+JavaScript code is used.
+At least one fetch function should be implemented (e.g., to load the web content and/or
+submit the form data).
+You **must not** use jQuery library.
+You **should not** use any frontend frameworks, such as React, Angular etc.
+
+Backend minimum requirements:
+The backend server **must** be implemented in NodeJS, a JavaScript run time environment.
+The server can be run on a local machine and be accessed via localhost (e.g., on port 3000
+although you can use a different port if you wish).
+The minimum requirements of the Web server are:
+•
+•
+
+•
+•
+•
+
+Use Express framework.
+HTTP methods should be used in ways that are compatible with the method definition.
+For example:
+o Use GET for retrieving data. **Do not** write data in a GET handler.
+o Use POST for saving data. **Do not** use POST to display a page.
+**Do not** use query parameters with POST.
+Should serve static files.
+Form handling:
+o Should be able to receive the client form data with no errors.
+
+o The data should be stored on the local file system (i.e., on the local server) in JSON
+format.
+o Acknowledgment of receipt should be sent back to the client/frontend and be rendered
+on a webpage (i.e., acknowledging whether or not the data has been successfully
+received).
+
+Desirable Requirements:
+Extra marks will be awarded for:
+• The use of dynamic web template:
+o rendering using a web template such as EJS or Pug. Note that the use of ejs or pug is
+not covered in the lectures. You will need to refer to online documentation to learn
+how to use it – a useful skill in programming!
+• Sending email to the user after they submit the form, to confirm successful sign-up.
+
+Documentation:
+•
+
+•
+
+You should provide a brief site guide (maximum one side of A4) describing how to use your
+website. This is an opportunity to highlight any special features you have incorporated on
+the website. The guide could be as succinct using a paragraph or two and a bullet point list.
+This is also an opportunity to comment on the division of the work between you and your
+team members.
+Weekly progress should be documented using Trello project management system.
+
+Beyond this specification all other design decisions are your own – and marks will be awarded
+accordingly. For example, you may wish to consider what data entry checks (validation)
+should be made, also other issues such as usability, accessibility, UI interactions etc.
+
+All web pages should be optimised for the computer lab screens.
+If you develop the website on a laptop, be sure to check that they still display adequately on
+higher-resolution screens.
+
+Team
+This is team-based assignment. Each team is made up of three or four members.
+Teamwork is one of the most efficient ways to solve problems and tackle big tasks in any
+environment and often the experience is highly rewarding. However, teamwork can also lead to
+unsuccessful outcomes, particularly when there are problems within the team. Typical problems
+that can arise include one person contributing more than others, or a lack of guidance, or a clash of
+personalities. To avoid the potential problems, we recommend that once you know your team,
+explore strengths of each person, and allocate tasks accordingly. Remember it is up to the team to
+decide the roles for their members as well as what their tasks are. Do watch out for the workload
+though, it should be evenly dispersed between all members.
+Each team should have a team leader or coordinator. This role can be taken by one person
+throughout the assignment or people can take turns. To make the most out of this experience, each
+person should have a defined role with their own responsibilities. By way of an example of allocating
+
+tasks and responsibilities, Table 1 shows an example of tasks associated with this assignment. I
+would suggest each member would take responsibility of at least one task as their contributions.
+Table 1: Assignment tasks example, which shows clearly what task each team member is responsible
+for.
+Task
+index.html
+
+CSS, HTML, fetch call, JSON, node/express
+
+goal-x.html
+
+CSS, HTML, fetch call, JSON, node/express
+
+teams.html
+
+CSS, HTML, fetch call, JSON, node/express
+
+form.html
+
+CSS, HTML, fetch call, JSON, node/express
+
+Putting everything together
+
+CSS, HTML, fetch call, JSON, node/express
+
+Who/Name
+
+Documentation (Trello and Blackboard submission)
+
+Trello online project documentation system
+Each team should record their work (such as design process and tasks progression) in Trello.
+Trello is an easy-to-use online project management system. All you need to do is to sign up,
+if you have not already done so, or sign in, create a new project (called board) name it as
+“Group X – 2025-26 CMP-4011A Assignment” (where X is your group ID), and invite your
+team members to the project. Make sure to invite me - Dr Temi Alade (email:
+T.Alade@uea.ac.uk), and Dr Riaz Shaikh (email: riaz-ahmed.shaikh@uea.ac.uk) to your project
+area.
+Note: You may be penalised if we cannot review your Trello project in a timely manner due
+to missing invites or permissions.
+
+Sketches/diagrams/pictures and notes of this assignment should be uploaded to Trello, as
+well as a list of each individual’s tasks.
+
+Where there is an ambiguity in the specification/requirement above, you should record this
+in Trello along with any decisions and justifications you have taken in response.
+
+Trello URL: https://trello.com. It is anticipated that each team will have an account opened
+with Trello. A Trello tutorial guide will be provided for you on Blackboard.
+
+Relationship to formative assessment
+The assignment is based on weekly lab exercises you have carried out.
+
+Deliverables
+•
+
+Stage 1 – Project review on the design of the website and Team management
+o When and where: Week 6 – 28 October (exact timeslot and room to be confirmed in
+due course)
+o A 5-minute presentation to be presented plus 5-minute for Q&A.
+• Stage 2 - Electronic submission
+o When: Tuesday 09 December 2025, time: 15:00
+o Where: Blackboard submission point
+o What to submit?
+▪ Everyone: Lab sign-off sheet (see Professionalism section below). Everyone
+should submit their lab sign-off sheet individually.
+▪ Group: A zip archive containing all files (HTML, CSS, JavaScript including Node
+JS, any images, and a single PDF site guide) must be submitted by each group
+(i.e., one submission per group).
+• Make sure links are relative for the website to be portable.
+• The web link to your Trello should be included in the site guide.
+• The single site guide is not assessed but does help the marker to
+understand the website and to be aware of any additional features
+you may have implemented.
+▪ The zip file should be named as: group_<ID>_wbp.zip (where
+<ID> is your group ID, which is assigned at the beginning of the term).
+▪ Archive formats other than zip will not be accepted. Note: you may be
+penalised if your archive format is not zip (e.g. .rar).
+NOTE: Your team may be penalised if the work is submitted late. Failure to submit on
+time may deny you (as a team) the chance of participating in the compulsory demo session.
+•
+
+Stage 3 - Compulsory demonstration.
+o When: week 12, Tuesday, 09 December
+o Time allowed: 10 minutes plus 5 minutes Q&A (exact timeslot to be advised)
+o The demonstration should include the core features of your website and highlight
+any additional features you may have implemented. Everyone will have a chance to
+talk about their part of the work. You may be questioned on your code or asked to
+show the code validation.
+o NOTE: Failure to participate the compulsory demonstration will result in a mark of
+zero being awarded to the absent person.
+
+•
+
+The assessment of Trello online project management system
+o When: week 12, Tuesday, 09 December
+o The marker will assess how well the project is documented using the online Trello
+system. Dr Temi Alade (email: T.Alade@uea.ac.uk) and Dr Riaz Shaikh (email: riazahmed.shaikh@uea.ac.uk) must be invited to your Trello system. It is your
+responsibility to ensure both Dr Temi Alade and Dr Riaz Shaikh are successfully
+invited to your Trello project area.
+
+Important Notes
+The assignment is a team-based project, reflecting on typical projects carried out in an
+industry environment.
+Every team will receive a group mark for their project. However, individual team members
+will receive their mark, which is calculated using the formula: group mark * ratio, where the
+ratio is determined by the individual’s engagement and contributions to the project rated by
+their own team members. Each team member will have an opportunity to comment on their peers’
+contribution via an online voting system. The vote will contribute to how the ratio is calculated.
+Additional weight will be awarded to any member of the team who acted as a buddy and guided
+their team member or members to successfully completed this project.
+The online voting system will be opened in week 12 for a limited time only, so please stay tuned!
+WARNING: Failure to participate in this voting system may result in the ratio being capped
+at 50% for that person.
+Be sure to document the design and development processes, and tasks assigned to each member
+of the team in Trello. Each member is encouraged to actively engage with this documenting process
+(i.e. documenting their own tasks and progress on Trello). Remember the success of the project is
+the success of the team!
+It is anticipated that everyone in the team will work collaboratively and cooperatively in this project.
+Any disputes should be dealt with by discussing with their own team members in the
+first instance. If that fails to resolve the issue, then raise it with Temi Alade or Dr Riaz Shaikh as soon
+as possible. The sooner you contact us, and the more information you provide will help us resolve
+the issue quicker for you.
+
+Professionalism
+Professionalism refers to the qualities that relate to skilled individuals and it should be at the heart
+of everything we do. These qualities include (not limited to) organisation, commitment, reliability,
+time management, and most importantly, showing that we care about our work.
+For this assignment, we will assess your professionalism in learning through your engagement of
+weekly lab activities throughout the semester. This means, you are required to complete eight lab
+exercises and get a lab tutor to sign off your work.
+How does this work?
+• Download the labs sign-off sheet from BlackBoard in week 1 and produce a printed copy.
+• Bring this printed copy to the lab every week.
+
+•
+•
+•
+
+When you complete your lab exercise (every week), show your code and outputs to a lab
+tutor for sign off. Note: You are **NOT** allowed to email a lab tutor with your work for
+sign off. You can only ask a lab tutor to sign off your work during your scheduled lab session.
+Your lab tutor will check your work, and subject to their satisfaction, they will put their
+signature on your labs sign-off sheet.
+Submit your labs sign-off sheet to BlackBoard submission point on or before 09 December
+2025, 15:00, see the “Deliverables” section above.
+
+Mark is awarded according to the information on the sign-off sheet that we received. It is your
+responsibility for safe-keeping your labs sign-off sheet as we will not keep a record for you. Be aware
+that your lab tutor will not be happy to sign off multiple labs in one go, so make sure that you
+manage your time well. In addition, they can refuse to sign off any labs at a last-minute request
+(imagine everybody was asking a lab tutor to sign off their labs in week 10!). Therefore, it is your
+responsibility to manage your time and bear in mind that it takes time for a lab tutor to check your
+work.
+
+Resources
+Lecture notes and lab exercises from the module will be helpful in completing this assignment.
+Stack Overflow is a valuable resource, but you must not post questions there (or on any
+other similar forum) asking for help with this assignment.
+https://developer.mozilla.org/en-US/ is a valuable reference point.
+
+Marking Scheme and Rubric:
+Group Project Mark:
+Stage 1 – Design & Team management
+Stage 2 - Demonstration
+Total:
+
+Weight
+30
+70
+100
+
+Score
+
+Stage 1: Project Review Marking Rubric
+Simplicity
+In terms of Web design, simplicity refers to an approach to express something in a
+complete and efficient way.
+Navigation
+Is your website easy to navigate forwards and backwards, with working links?
+Theme and Consistency
+Does your project have a consistent font, colour, and style theme?
+Creativity and Design
+Does your project show originality and good overall design?
+Teamwork & Participation
+
+10%
+10%
+10%
+10%
+60%
+
+Stage 2: Project Review Marking Rubric
+Quality of the overall website, based on “look and feel” and functionality, e.g. visual hierarchy and
+
+45%
+
+flow, ease of navigation, colour scheme, ability to resize sensibly, form functionality, accessibility,
+dynamic content, JSON, HTTP routing, form validation and sanitisation.
+Web UI quality - 15%
+Fetch and JSON – 15%
+Node and Express - 15%
+Additional marks will be awarded for other features you have researched yourselves that effectively
+enhanced the usability/performance of the website.
+Quality of coding (HTML, CSS, and JavaScript)
+Answers to questions and the demonstration of student’s wider understanding
+Documentation – Trello and Blackboard submission
+
+Individual Mark:
+Group mark
+Peer and academic adjustment
+Weight
+Individual project mark after 80
+adjustment
+Professionalism (labs sign-off 20
+sheet)
+Provisional final mark
+100
+Comments:
+
+Mark
+
+20%
+15%
+10%
+10%
+
+

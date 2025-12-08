@@ -1,6 +1,6 @@
 {
   "logo": "assets/logo.png",
-  "languages": ["English", "Français", "Español", "Pусский", "عربي", "中国人"],
+  "languages": ["English", "Français", "Español", "Pусский", "عربي"],
   "nav": [
     { "label": "Home", "href": "index.html" },
     { "label": "Our Goals", "href": "goals.html" },
