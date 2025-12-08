@@ -2,7 +2,7 @@ header {
     display: flex;
     align-items: center;
     padding: 12px 20px;
-    background-color: #cdb0ff; /* lighter purple */
+    background-color: #cdb0ff;
     border-bottom: 4px solid #8a46a6;
 }
 
@@ -23,6 +23,8 @@ header ul li:hover {
 
 .logo {
     padding: 10px 0;
+    text-decoration: none;
+    display: block;
 }
 
 .logo img {
@@ -58,9 +60,9 @@ header ul li:hover {
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 18px;
+    gap: 20px;
     align-items: center;
-    margin-left: auto;
+    margin-left: 30%;
 }
 
 .navigation li {
@@ -84,9 +86,154 @@ header ul li:hover {
     padding: 8px 12px;
     border: none;
     cursor: pointer;
+    margin-left: 30px;
 }
 
-/* Hero */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+}
+
+.hamburger span {
+    width: 30px;
+    height: 3px;
+    background: #222;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    transition: right 0.3s;
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 36px;
+    color: #222;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.mobile-close:hover {
+    color: #8a46a6;
+}
+
+.mobile-nav {
+    list-style: none;
+    padding: 0;
+    margin: 40px 0 30px 0;
+}
+
+.mobile-nav li {
+    margin-bottom: 15px;
+}
+
+.mobile-nav a {
+    display: block;
+    padding: 12px;
+    color: #222;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.mobile-nav a:hover {
+    background: #f0f0f0;
+}
+
+.mobile-lang {
+    margin-bottom: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.mobile-lang-title {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.mobile-lang ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mobile-lang li {
+    padding: 8px 12px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.mobile-lang li.active {
+    background: #8a46a6;
+    color: white;
+    font-weight: 700;
+}
+
+.mobile-cta {
+    width: 100%;
+    padding: 12px;
+    background: #0f0f0f;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
 #hero {
     padding: 48px 80px;
     background: #f3eaf3;
@@ -129,7 +276,6 @@ header ul li:hover {
     border: 8px solid #7f3f7f;
 }
 
-/* Current Goals section */
 #current-goals {
     padding: 40px 60px 80px 60px;
     background: #f6edf6;
@@ -183,7 +329,6 @@ header ul li:hover {
     font-weight: 600;
 }
 
-/* Footer */
 #site-footer {
     background: #cdb0ff;
     padding: 28px 40px;
@@ -204,11 +349,15 @@ header ul li:hover {
 
 .footer-right { color:#222 }
 
-/* Responsive */
 @media (max-width: 800px) {
     .hero-inner { flex-direction: column; text-align: center }
     .hero-image img { width: 100%; height: 200px }
     .goals-container { flex-direction: column; align-items: center }
     header { flex-wrap: wrap }
     .navigation { margin-left: 0; margin-top: 8px }
+
+    .hamburger { display: flex; }
+    .language { display: none; }
+    .navigation { display: none; }
+    .header-cta { display: none; }
 }

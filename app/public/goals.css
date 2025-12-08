@@ -1,5 +1,3 @@
-/* Styles specific to goals.html */
-
 #goals-hero {
   margin: 0;
 }
@@ -140,7 +138,6 @@
   margin-bottom: 0;
 }
 
-/* responsive */
 @media (max-width: 800px) {
   .goals-hero-inner img.goals-hero-img {
     height: 220px;
@@ -166,4 +163,3 @@
     font-size: 20px;
   }
 }
-

@@ -7,7 +7,7 @@
   "history": "Our team managed to distribute tasks to all members of the team in a timely manner. We were able to complete the project on time and we had regular meetings to discuss progress and evaluate each others performance. We all think we did an equal amount of work and we all contributed equally to the project.",
   "team": [
     { "name": "Sinan Guckiran", "role": "Backend Developer", "avatar": "assets/avatar.png" },
-    { "name": "Maxim Iliev", "role": "Coordinator", "avatar": "assets/avatar.png" },
+    { "name": "Maxim Iliev", "role": "Frontend Designer", "avatar": "assets/avatar.png" },
     { "name": "Harry Moss", "role": "Frontend CSS Developer", "avatar": "assets/avatar.png" },
     { "name": "Luke Barret", "role": "JSON Content Writing", "avatar": "assets/avatar.png" }
   ]

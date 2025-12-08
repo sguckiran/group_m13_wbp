@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Shaping a Sustainable Future for Norwich",
-    "subtitle": "With the Sustainability Advisory Committee, learn how local policies align with the UN Sustainable Development Goals.",
+    "subtitle": "Learn how local policies align with the UN Sustainable Development Goals.",
     "button": { "text": "find out more", "href": "#current-goals" },
     "image": "assets/homepage.webp"
   },
