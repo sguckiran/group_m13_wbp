@@ -1,2 +1,2 @@
 # webdevuea
-web dev coursework
+This is the website development coursework for group M13.
