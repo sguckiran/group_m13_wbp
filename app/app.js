@@ -1,9 +1,18 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const port = 8080;
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'unsustainabledevelopment461@gmail.com',
+        pass: 'regm newq kmej cscu'
+    }
+});
 
 const dataDir = path.join(__dirname, 'data');
 if (!fs.existsSync(dataDir)) {
@@ -62,6 +71,30 @@ app.post('/api/signup', (req, res) => {
 
     signups.push(data);
     fs.writeFileSync(file, JSON.stringify(signups, null, 2));
+
+    const mailOptions = {
+        from: 'unsustainabledevelopment461@gmail.com',
+        to: data.email,
+        subject: 'Thank you for signing up - UEA Sustainability',
+        html: `
+            <h2>Welcome to UEA Sustainability!</h2>
+            <p>Dear ${data.firstName} ${data.lastName},</p>
+            <p>Thank you for signing up and showing interest in our sustainability initiatives.</p>
+            ${data.comments ? `<p>We received your message: "${data.comments}"</p>` : ''}
+            <p>We'll keep you updated on our progress and how you can get involved.</p>
+            <br>
+            <p>Best regards,</p>
+            <p>The UEA Sustainability Team</p>
+        `
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log('Email error:', error);
+        } else {
+            console.log('Email sent:', info.response);
+        }
+    });
 
     res.status(201).json({
         success: true,
