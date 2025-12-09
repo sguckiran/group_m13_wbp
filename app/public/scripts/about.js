@@ -1,4 +1,4 @@
-(function() {
+function() {
   var aboutData = null;
   var footerData = null;
   var translationsData = null;
